@@ -8,6 +8,5 @@ decodedTransactions=$(bitcoin-cli decoderawtransaction $transactions)
 
 if echo $decodedTransactions | jq -e '.vin[0].txinwitness' > /dev/null; then
     witness=$(echo $decodedTransactions | jq -r '.vin[0].txinwitness[2]')
-    echo $witness
     echo ${witness:4:66} #bash-like pk extract style for CI pipeline.
 fi
